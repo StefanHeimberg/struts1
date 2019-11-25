@@ -39,12 +39,12 @@
 
    <dependencies>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-taglib</artifactId>
          <version>${project.version}</version>
       </dependency>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-tiles</artifactId>
          <version>${project.version}</version>
       </dependency>
@@ -57,7 +57,7 @@
    </dependencies>
    
    <build>
-     <finalName>${pom.artifactId}</finalName>
+     <finalName>${project.artifactId}</finalName>
    </build>
 
 </project>

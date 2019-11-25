@@ -39,17 +39,17 @@
 
    <dependencies>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-taglib</artifactId>
          <version>${project.version}</version>
       </dependency>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-extras</artifactId>
          <version>${project.version}</version>
       </dependency>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-mailreader-dao</artifactId>
          <version>${project.version}</version>
       </dependency>

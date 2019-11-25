@@ -39,7 +39,7 @@
 
    <dependencies>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-core</artifactId>
          <version>${project.version}</version>
       </dependency>
@@ -50,7 +50,7 @@
          <scope>provided</scope>
       </dependency>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-taglib</artifactId>
          <version>${project.version}</version>
       </dependency>

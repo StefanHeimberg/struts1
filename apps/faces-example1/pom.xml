@@ -39,7 +39,7 @@
 
    <dependencies>
       <dependency>
-         <groupId>${pom.groupId}</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>struts-faces</artifactId>
          <version>${project.version}</version>
       </dependency>
@@ -98,7 +98,7 @@
             </includes>
          </resource>
       </resources>
-      <finalName>${pom.artifactId}</finalName>
+      <finalName>${project.artifactId}</finalName>
    </build>
 
 </project>
