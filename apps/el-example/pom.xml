@@ -41,7 +41,7 @@
       <dependency>
          <groupId>${pom.groupId}</groupId>
          <artifactId>struts-el</artifactId>
-         <version>${pom.version}</version>
+         <version>${project.version}</version>
       </dependency>
       <dependency>
          <groupId>javax.servlet</groupId>

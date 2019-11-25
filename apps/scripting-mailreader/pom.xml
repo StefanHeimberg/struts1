@@ -41,22 +41,22 @@
       <dependency>
          <groupId>${pom.groupId}</groupId>
          <artifactId>struts-scripting</artifactId>
-         <version>${pom.version}</version>
+         <version>${project.version}</version>
       </dependency>
       <dependency>
          <groupId>${pom.groupId}</groupId>
          <artifactId>struts-taglib</artifactId>
-         <version>${pom.version}</version>
+         <version>${project.version}</version>
       </dependency>
       <dependency>
          <groupId>${pom.groupId}</groupId>
          <artifactId>struts-mailreader-dao</artifactId>
-         <version>${pom.version}</version>
+         <version>${project.version}</version>
       </dependency>
       <dependency>
          <groupId>${pom.groupId}</groupId>
          <artifactId>struts-extras</artifactId>
-         <version>${pom.version}</version>
+         <version>${project.version}</version>
       </dependency>
       <dependency>
          <groupId>groovy</groupId>
