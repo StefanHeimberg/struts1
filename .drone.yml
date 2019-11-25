@@ -6,6 +6,6 @@ steps:
 - name: build
   image: adoptopenjdk/openjdk11:latest
   commands:
-  - ./mvn test-compile -B -V
-  - ./mvn test -B
-  - ./mvn verify -B
+  - ./mvnw test-compile -B -V
+  - ./mvnw test -B
+  - ./mvnw verify -B
