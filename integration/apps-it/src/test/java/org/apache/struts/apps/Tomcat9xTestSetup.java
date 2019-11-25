@@ -20,7 +20,6 @@
  */
 package org.apache.struts.apps;
 
-import java.io.File;
 import java.net.URL;
 
 import junit.extensions.TestSetup;
@@ -38,17 +37,17 @@ import org.codehaus.cargo.generic.DefaultContainerFactory;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 
 /**
- * Set up to run tests with Tomcat 5.x.  If the 'cargo.tomcat5x.home'
- * System property is not set, Tomcat 5.0.30 will be downloaded from ibiblio.
+ * Set up to run tests with Tomcat 9.x.  If the 'cargo.tomcat9x.home'
+ * System property is not set, Tomcat 9.x will be downloaded from ibiblio.
  */
-public class Tomcat5xTestSetup extends TestSetup {
+public class Tomcat9xTestSetup extends TestSetup {
 
     InstalledLocalContainer container;
     String version;
     String port;
     String localRepository;
 
-    public Tomcat5xTestSetup(Test test) {
+    public Tomcat9xTestSetup(Test test) {
         super(test);
     }
 
@@ -56,7 +55,7 @@ public class Tomcat5xTestSetup extends TestSetup {
      * Required until MSUREFIRE-119 is fixed.
      */
     public String getName() {
-        return "Tomcat5xTestSetup";
+        return getClass().getSimpleName();
     }
 
     protected void setUp() throws Exception {
@@ -66,26 +65,25 @@ public class Tomcat5xTestSetup extends TestSetup {
 
         // (1) Find the locally installed container.  This System property may
         //     be set in settings.xml, or on the command line with
-        //     -Dcargo.tomcat5x.home=c:/java/apache-tomcat-5.5.17
-        String tomcat5x = System.getProperty("cargo.tomcat5x.home");
+        //     -Dcargo.tomcat9x.home=c:/java/apache-tomcat-9
+        String tomcat9x = System.getProperty("cargo.tomcat9x.home");
 
-        File tomcatHome;
-        if (tomcat5x == null || tomcat5x.startsWith("$")) {
-            //System.out.println("INFO: Downloading Tomcat 5.0 from a mirror");
+        String tomcatHome;
+        if (tomcat9x == null || tomcat9x.startsWith("$")) {
+            System.out.println("INFO: Downloading Tomcat 9.0 from a mirror");
             Installer installer = new ZipURLInstaller(
-                    new URL("http://mirrors.ibiblio.org/pub/mirrors/apache"
-                            + "/tomcat/tomcat-5/v5.5.26/bin/apache-tomcat-5.5.26.zip"));
+                    new URL("http://mirror.easyname.ch/apache/tomcat/tomcat-9/v9.0.29/bin/apache-tomcat-9.0.29.zip"));
             installer.install();
             tomcatHome = installer.getHome();
         } else {
-            tomcatHome = new File(tomcat5x);
+            tomcatHome = tomcat9x;
         }
-        //System.out.println("INFO: Tomcat home is " + tomcatHome);
+        System.out.println("INFO: Tomcat home is " + tomcatHome);
 
         // (2) Create the Cargo Container instance wrapping our physical container
         LocalConfiguration configuration = (LocalConfiguration)
                 new DefaultConfigurationFactory().createConfiguration(
-                        "tomcat5x", ConfigurationType.STANDALONE);
+                        "tomcat9x", ContainerType.INSTALLED, ConfigurationType.STANDALONE);
         container = (InstalledLocalContainer)
                 new DefaultContainerFactory().createContainer(
                         "tomcat5x", ContainerType.INSTALLED, configuration);

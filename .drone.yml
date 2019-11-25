@@ -6,4 +6,4 @@ steps:
 - name: build
   image: adoptopenjdk/openjdk11:latest
   commands:
-  - ./mvnw -Dapps -Ditest -Dassembly -B -V clean verify
+  - ./mvnw -Dapps -Ditest -Dassembly -B -V clean install

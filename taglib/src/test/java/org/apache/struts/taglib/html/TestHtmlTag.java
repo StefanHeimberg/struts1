@@ -50,15 +50,6 @@ public class TestHtmlTag extends TestCase {
     }
 
     /**
-     * Start the tests.
-     *
-     * @param theArgs the arguments. Not used
-     */
-    public static void main(String[] theArgs) {
-        junit.awtui.TestRunner.main(new String[] { TestHtmlTag.class.getName() });
-    }
-
-    /**
      * @return a test suite (<code>TestSuite</code>) that includes all methods
      *         starting with "test"
      */

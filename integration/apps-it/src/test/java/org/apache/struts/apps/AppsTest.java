@@ -58,7 +58,7 @@ public class AppsTest extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite(AppsTest.class);
-        return new Tomcat5xTestSetup(suite);
+        return new Tomcat9xTestSetup(suite);
     }
 
     /**

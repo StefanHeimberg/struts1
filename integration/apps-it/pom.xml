@@ -38,7 +38,7 @@
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
-         <version>3.8.1</version>
+         <version>4.12</version>
       </dependency>
       <dependency>
          <groupId>htmlunit</groupId>
@@ -54,13 +54,13 @@
       <dependency>
          <groupId>org.codehaus.cargo</groupId>
          <artifactId>cargo-core-uberjar</artifactId>
-         <version>0.8</version>
+         <version>1.7.7</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.codehaus.cargo</groupId>
          <artifactId>cargo-ant</artifactId>
-         <version>0.8</version>
+         <version>1.7.7</version>
          <scope>test</scope>
       </dependency>
    </dependencies>
@@ -84,20 +84,12 @@
                   <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-surefire-plugin</artifactId>
                   <configuration>
-                     <systemProperties>
-                        <property>
-                           <name>cargo.tomcat5x.home</name>
-                           <value>${cargo.tomcat5x.home}</value>
-                        </property>
-                        <property>
-                           <name>cargo.servlet.port</name>
-                           <value>8080</value>
-                        </property>
-                        <property>
-                           <name>version</name>
-                           <value>${project.version}</value>
-                        </property>
-                     </systemProperties>
+                     <systemPropertyVariables>
+                        <cargo.tomcat9x.home>${cargo.tomcat9x.home}</cargo.tomcat9x.home>
+                        <cargo.servlet.port>8080</cargo.servlet.port>
+                        <version>${project.version}</version>
+                        <localRepository>${settings.localRepository}</localRepository>
+                     </systemPropertyVariables>
                   </configuration>
                   <executions>
                      <execution>
