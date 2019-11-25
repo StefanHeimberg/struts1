@@ -6329,7 +6329,7 @@
                 JavaScript event handler executed when a
                 when a user selects some text in a text field.
                 <dl><dt><b>Since:</b></dt>
-                <dd>Struts 1.3.10</dd></dl>
+                <dd>Struts 1.3.10 (Java 11)</dd></dl>
             ]]>
             </description>
         </attribute>
