@@ -30,7 +30,6 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.apache.struts</groupId>
    <artifactId>struts-it-apps</artifactId>
-   <packaging>pom</packaging>
    <name>Struts Integration - Apps Tests</name>
    <url>http://struts.apache.org</url>
 
@@ -39,11 +38,13 @@
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <version>4.12</version>
+         <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>htmlunit</groupId>
          <artifactId>htmlunit</artifactId>
          <version>1.8</version>
+         <scope>test</scope>
          <exclusions>
             <exclusion>
                <groupId>javax.xml</groupId>
@@ -63,43 +64,151 @@
          <version>1.7.7</version>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-blank</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-cookbook</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-el-example</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-examples</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-faces-example1</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-faces-example2</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-mailreader</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.struts</groupId>
+         <artifactId>struts-scripting-mailreader</artifactId>
+         <version>${project.version}</version>
+         <type>war</type>
+      </dependency>
    </dependencies>
 
           <build>
             <plugins>
                <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-compiler-plugin</artifactId>
+                  <artifactId>maven-failsafe-plugin</artifactId>
                   <executions>
                      <execution>
-                        <id>compiler-for-tests</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                           <goal>testCompile</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-surefire-plugin</artifactId>
-                  <configuration>
-                     <systemPropertyVariables>
-                        <cargo.tomcat9x.home>${cargo.tomcat9x.home}</cargo.tomcat9x.home>
-                        <cargo.servlet.port>8080</cargo.servlet.port>
-                        <version>${project.version}</version>
-                        <localRepository>${settings.localRepository}</localRepository>
-                     </systemPropertyVariables>
-                  </configuration>
-                  <executions>
-                     <execution>
-                        <id>surefire-it</id>
+                        <id>integration-test</id>
                         <phase>integration-test</phase>
                         <goals>
-                           <goal>test</goal>
+                           <goal>integration-test</goal>
+                        </goals>
+                     </execution>
+                     <execution>
+                        <id>verify</id>
+                        <phase>verify</phase>
+                        <goals>
+                           <goal>verify</goal>
                         </goals>
                      </execution>
                   </executions>
+                  <configuration>
+                     <systemPropertyVariables>
+                        <cargo.servlet.port>8080</cargo.servlet.port>
+                     </systemPropertyVariables>
+                  </configuration>
+               </plugin>
+               <plugin>
+                  <groupId>org.codehaus.cargo</groupId>
+                  <artifactId>cargo-maven2-plugin</artifactId>
+                  <version>1.7.7</version>
+                  <executions>
+                     <execution>
+                        <id>cargo-start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                           <goal>start</goal>
+                        </goals>
+                     </execution>
+                     <execution>
+                        <id>cargo-stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                           <goal>stop</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+                  <configuration>
+                     <container>
+                        <containerId>tomcat9x</containerId>
+                        <type>embedded</type>
+                     </container>
+                     <deployables>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-blank</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-cookbook</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-el-example</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-examples</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-faces-example1</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-faces-example2</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-mailreader</artifactId>
+                           <type>war</type>
+                        </deployable>
+                        <deployable>
+                           <groupId>org.apache.struts</groupId>
+                           <artifactId>struts-scripting-mailreader</artifactId>
+                           <type>war</type>
+                        </deployable>
+                     </deployables>
+                  </configuration>
                </plugin>
             </plugins>
          </build>

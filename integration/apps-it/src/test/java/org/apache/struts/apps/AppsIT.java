@@ -20,54 +20,33 @@
  */
 package org.apache.struts.apps;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.net.URL;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
+import static junit.framework.TestCase.assertEquals;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+public class AppsIT {
 
-/**
- * Verify that each of the example apps starts and (at least)
- * displays its default page.
- */
-public class AppsTest extends TestCase {
-
-    private String version;
     private String port;
 
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppsTest(String testName) {
-        super(testName);
-    }
-
-    public void setUp() throws Exception {
-        super.setUp();
-        version = System.getProperty("version");
+    @Before
+    public void init() {
         port = System.getProperty("cargo.servlet.port");
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite() {
-        TestSuite suite = new TestSuite(AppsTest.class);
-        return new Tomcat9xTestSetup(suite);
     }
 
     /**
      * Verify that the Struts Blank app has started
      */
+    @Test
     public void testStrutsBlank() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-blank-" + version);
+                + port + "/struts-blank");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("Struts Blank Application", page.getTitleText());
@@ -76,10 +55,11 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Cookbook app has started
      */
+    @Test
     public void testStrutsCookbook() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-cookbook-" + version);
+                + port + "/struts-cookbook");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("Struts Cookbook", page.getTitleText());
@@ -89,10 +69,11 @@ public class AppsTest extends TestCase {
      * Verify that the view source function is working
      * in the Struts Cookbook app.
      */
+    @Test
     public void testStrutsCookbookViewSource() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-cookbook-" + version + "/source.jsp"
+                + port + "/struts-cookbook/source.jsp"
                 + "?src=/WEB-INF/src/java/examples/SuccessAction.java");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
@@ -102,10 +83,11 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Examples app has started
      */
+    @Test
     public void testStrutsExamples() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-examples-" + version);
+                + port + "/struts-examples");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("Struts Examples", page.getTitleText());
@@ -114,10 +96,12 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Faces Example 1 app has started
      */
+    @Ignore
+    @Test
     public void testStrutsFacesExample1() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-faces-example1-" + version);
+                + port + "/struts-faces-example1");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("MailReader Demonstration Application",
@@ -127,10 +111,12 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Faces Example 2 app has started
      */
+    @Ignore
+    @Test
     public void testStrutsFacesExample2() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-faces-example2-" + version);
+                + port + "/struts-faces-example2");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("Struts+Tiles+Faces Example Application",
@@ -140,10 +126,11 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Mailreader app has started
      */
+    @Test
     public void testStrutsMailreader() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:"
-                + port + "/struts-mailreader-" + version);
+                + port + "/struts-mailreader");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("MailReader Demonstration Application",
@@ -153,10 +140,11 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts Scripting Mailreader app has started
      */
+    @Test
     public void testStrutsScriptingMailreader() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:" + port
-                + "/struts-scripting-mailreader-" + version);
+                + "/struts-scripting-mailreader");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("MailReader Demonstration Application",
@@ -166,10 +154,11 @@ public class AppsTest extends TestCase {
     /**
      * Verify that the Struts EL Exercise Taglib app has started
      */
+    @Test
     public void testStrutsELExcerciseTaglib() throws Exception {
         WebClient webClient = new WebClient();
         URL url = new URL("http://localhost:" + port
-                + "/struts-el-example-" + version);
+                + "/struts-el-example");
         HtmlPage page = (HtmlPage) webClient.getPage(url);
 
         assertEquals("Struts-EL Test Application", page.getTitleText());
